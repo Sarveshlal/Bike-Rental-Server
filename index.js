@@ -9,7 +9,9 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 const mongoclient = mongodb.MongoClient;
-const DB_URL = process.env.DBURL || "mongodb://127.0.0.1:27017";
+const DB_URL =
+  "mongodb+srv://sarvesh:sarvesh@cluster0.9ltte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" ||
+  "mongodb://127.0.0.1:27017";
 const port = process.env.PORT || 8080;
 const bikebooklist = JSON.parse(
   fs.readFileSync("bikebooklist.json", "utf-8", (err, data) => {
@@ -63,6 +65,7 @@ app.post("/book", async (req, res) => {
     };
     const datas = {
       name: req.body.name,
+      email: req.body.email,
       DLNO: req.body.licenseno,
       bike: req.body.bike,
       fromdate: req.body.fromdate,
