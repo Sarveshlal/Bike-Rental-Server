@@ -39,10 +39,10 @@ app.post("/availability", async (req, res) => {
     });
     if (result) {
       res.json({
-        message: "Bike booked. not available",
+        message: "Not available",
       });
     } else {
-      res.status(200).json({ message: "Bike Available" });
+      res.status(200).json({ message: "Success" });
     }
   } catch (error) {
     console.log(error);
@@ -76,31 +76,31 @@ app.post("/book", async (req, res) => {
     await db.collection("bookingbike").insertOne(datas);
     bikebooklist.push(data);
     fs.writeFileSync("bikebooklist.json", JSON.stringify(bikebooklist));
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "sarveshlalacc2@gmail.com",
-        pass: "Sarvesh@05",
-      },
-    });
-    var mailOptions = {
-      from: "sarveshlal@gmail.com",
-      to: req.body.email,
-      subject: "Activation Link",
-      html: `
-          <h2>This is the confirmation Mail</h2>
-          <h3>Thank you for Booking in Pro Rental Bikes.</h3>
-          <p>Your <b>Bike</b> : ${req.body.bike} renting from ${req.body.fromdate} to ${req.body.todate} is booked</p>
-          <p>Please pick up at our station..</p>
-          <h4>Thank You</h4>
-        `,
-    };
-    transporter.sendMail(mailOptions, function (err, data) {
-      if (err) console.log(err);
-      else console.log("Email sent: " + data.response);
-    });
+    // var transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "sarveshlalacc2@gmail.com",
+    //     pass: "Sarvesh@05",
+    //   },
+    // });
+    // var mailOptions = {
+    //   from: "sarveshlal@gmail.com",
+    //   to: req.body.email,
+    //   subject: "Activation Link",
+    //   html: `
+    //       <h2>This is the confirmation Mail</h2>
+    //       <h3>Thank you for Booking in Pro Rental Bikes.</h3>
+    //       <p>Your <b>Bike</b> : ${req.body.bike} renting from ${req.body.fromdate} to ${req.body.todate} is booked</p>
+    //       <p>Please pick up at our station..</p>
+    //       <h4>Thank You</h4>
+    //     `,
+    // };
+    // transporter.sendMail(mailOptions, function (err, data) {
+    //   if (err) console.log(err);
+    //   else console.log("Email sent: " + data.response);
+    // });
     res.status(200).json({
-      message: "Bike is successfully Booked. Please pick up at our station",
+      message: "Success",
     });
   } catch (error) {
     console.log(error);
