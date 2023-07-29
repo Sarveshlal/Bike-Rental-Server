@@ -39,10 +39,10 @@ app.post("/availability", async (req, res) => {
     });
     if (result) {
       res.json({
-        message: "Not available",
+        message: "Bike booked. not available",
       });
     } else {
-      res.status(200).json({ message: "Success" });
+      res.status(200).json({ message: "Bike Available" });
     }
   } catch (error) {
     console.log(error);
@@ -100,7 +100,7 @@ app.post("/book", async (req, res) => {
     //   else console.log("Email sent: " + data.response);
     // });
     res.status(200).json({
-      message: "Success",
+      message: "Bike is successfully Booked. Please pick up at our station",
     });
   } catch (error) {
     console.log(error);
